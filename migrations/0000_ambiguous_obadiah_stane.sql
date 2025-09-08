@@ -1,4 +1,4 @@
-CREATE TYPE "public"."status" AS ENUM('non payé', 'payed');--> statement-breakpoint
+CREATE TYPE "public"."status" AS ENUM('non pay', 'payed');--> statement-breakpoint
 CREATE TABLE "account" (
 	"id" text PRIMARY KEY NOT NULL,
 	"account_id" text NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE "factures" (
 	"livrer_par" integer NOT NULL,
 	"demander_a" timestamp DEFAULT now() NOT NULL,
 	"num_avis" text NOT NULL,
-	"status" "status" DEFAULT 'non payé',
+	"status" "status" DEFAULT 'non pay',
 	CONSTRAINT "montant" CHECK ("factures"."montant" > 0)
 );
 --> statement-breakpoint

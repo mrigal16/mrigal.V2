@@ -15,7 +15,7 @@ export default function HomePage() {
   return (
     <main>
       <Landing />
-      <div className="mt-26 grid lg:grid-cols-3 gap-3 m-3 grid-cols-1">
+      {/* <div className="mt-26 grid lg:grid-cols-3 gap-3 m-3 grid-cols-1">
         <Card
           className="flex aspect-[2/1] w-full max-w-md flex-col items-center justify-center rounded-xl  text-white
           p-8 text-center bg-black/60"
@@ -52,7 +52,7 @@ export default function HomePage() {
             démarches. Plus de déplacements, plus de stress.
           </CardContent>
         </Card>
-      </div>
+      </div> */}
       <Footer />
     </main>
   );

@@ -37,7 +37,7 @@ export const statuses = [
     icon: CheckCircle2,
   },
   {
-    value: "non payé",
+    value: "non pay",
     label: "Non payé",
     icon: XCircle,
   },

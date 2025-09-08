@@ -39,6 +39,10 @@ import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { useUser } from "@/lib/context";
 import FetchInvoice from "@/components/fetch";
+import { useRouter } from "next/navigation";
+import { usePaiementStore } from "@/stores/usePaiementStore";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   // Rank the item
   const itemRank = rankItem(row.getValue(columnId), value);
@@ -109,7 +113,7 @@ const Facture_Utilisatuer_Comp = ({ FacturesQuery }: any) => {
               <DataTableColumnHeader column={column} title="Status" />
             ),
             cell(props) {
-              if (props.row.original.status === "non payé") {
+              if (props.row.original.status === "non pay") {
                 return (
                   <Badge className="bg-red-500" variant="default">
                     Non Payé
@@ -146,6 +150,7 @@ const Facture_Utilisatuer_Comp = ({ FacturesQuery }: any) => {
             ),
             footer: (props) => props.column.id,
           },
+
           {
             accessorFn: (row) => row.Action,
             id: "action",
@@ -155,6 +160,32 @@ const Facture_Utilisatuer_Comp = ({ FacturesQuery }: any) => {
             cell: (props) => {
               const invoiceId = props.row.original.id; // id de la facture
               return <FetchInvoice invoiceId={invoiceId} />;
+            },
+            footer: (props) => props.column.id,
+          },
+          {
+            accessorFn: (row) => row.Action,
+            id: "paiement",
+            header: () => <p>Paiement</p>,
+            cell: (props) => {
+              const setPay = usePaiementStore((state) => state.setData);
+              const rowData = props.row.original;
+
+              const handleClick = (e) => {
+                e.preventDefault(); // ❗️important
+                setPay(rowData); // ✅ enregistre la donnée
+                window.location.href = "/dashboard/payment"; // ou router.push(...)
+              };
+
+              return (
+                <a
+                  //href="/dashboard/payment"
+                  onClick={handleClick}
+                  className="underline cursor-pointer"
+                >
+                  Paiement
+                </a>
+              );
             },
             footer: (props) => props.column.id,
           },

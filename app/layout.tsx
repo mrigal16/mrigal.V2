@@ -16,7 +16,11 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-const manrope = Manrope({ subsets: ["latin"] });
+export const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "700"], // or as needed
+  display: "swap",
+});
 
 export default function RootLayout({
   children,

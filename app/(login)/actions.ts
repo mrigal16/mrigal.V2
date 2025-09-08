@@ -45,29 +45,42 @@ const signInSchema = z.object({
 
 export const signIn = validatedAction(signInSchema, async (data, formData) => {
   const { username, password } = data;
+  try {
+    await auth.api.signInUsername({
+      body: {
+        username,
+        password,
+      },
+      rememberMe: false,
+      callbackURL: "/dashboard",
+    });
 
-  const userOne = await auth.api.signInUsername({
-    body: {
-      username,
-      password,
-    },
-    rememberMe: false,
-    callbackURL: "/dashboard",
-    onError: (ctx: any) => {
-      // Handle the error
-      if (ctx.error.status === 403) {
-        alert("Please verify your email address");
-      }
-      //you can also show the original error message
-      alert(ctx.error.message);
-    },
-    onSuccess: (ctx: any) => {
-      redirect("/dashboard");
-    },
-  });
-  const redirectTo = formData.get("redirect") as string | null;
-  if (userOne) {
-    redirect("/dashboard");
+    return {
+      status: "success",
+      message: "Connexion réussie.",
+      redirectTo: "/dashboard",
+    };
+  } catch (error: any) {
+    const message = error?.message?.toLowerCase() || "";
+    console.log(message);
+    if (message.includes("verify")) {
+      return {
+        status: "error",
+        message: "Veuillez vérifier votre adresse e-mail.",
+      };
+    }
+
+    if (message.includes("invalid username or password")) {
+      return {
+        status: "error",
+        message: "Nom d'utilisateur ou mot de passe incorrect.",
+      };
+    }
+
+    return {
+      status: "error",
+      message: "Une erreur est survenue. Veuillez réessayer.",
+    };
   }
 });
 

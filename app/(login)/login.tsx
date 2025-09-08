@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { LoaderCircle } from "lucide-react";
 import { signIn } from "./actions";
 import { ActionState } from "@/lib/middelware";
+import { useRouter } from "next/navigation";
+
 import { Card } from "@/components/ui/card";
 import {
   Form,
@@ -69,12 +71,12 @@ export function Login({ mode = "signin" }) {
   }
 
   const formRef = useRef<HTMLFormElement>(null);
-
+  const router = useRouter();
   useEffect(() => {
-    if (state?.success) {
-      toast.success(
-        "Formulaire soumis avec succès! Vos informations ont été enregistrées."
-      );
+    if (state?.status === "success") {
+      setTimeout(() => {
+        router.push(state.redirectTo || "/dashboard");
+      }, 100); // small delay to show toast before redirect
     }
   }, [state]);
 
@@ -210,11 +212,11 @@ export function Login({ mode = "signin" }) {
                 </ul>
               )}
             </div>
-            {state?.error && (
+            {/*state?.error && (
               <div className="text-center text-red-500 text-sm">
                 {state.error}
               </div>
-            )}
+            )*/}
           </form>
         </Form>
 

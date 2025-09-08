@@ -87,7 +87,7 @@ export const livreurTable = pgTable("livreur", {
   nomComplet: text().notNull(),
   phone: text().notNull().unique(),
 });
-export const statusEnum = pgEnum("status", ["non payé", "payed"]);
+export const statusEnum = pgEnum("status", ["non pay", "payed"]);
 
 export const facturesTable = pgTable(
   "factures",
@@ -103,7 +103,7 @@ export const facturesTable = pgTable(
     DemandeAt: timestamp("demander_a").notNull().defaultNow(),
     num_avis: text().notNull(),
     url: text("url").notNull(),
-    status: statusEnum().default("non payé"),
+    status: statusEnum().default("non pay"),
   },
   (table) => [check("montant", sql`${table.montant} > 0`)]
 );

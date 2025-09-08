@@ -28,6 +28,7 @@ export const auth = betterAuth({
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url }) => {
       await transporter.sendMail({
+        from: `"DigitservZ"<${process.env.EMAIL_MAIN}>`,
         to: user.email,
         subject: "Réinitialisez votre mot de passe",
         html: `<!DOCTYPE html>

@@ -190,11 +190,21 @@ const Legal = () => {
       <p className="hyphens-auto text-wrap p-1">
         L’utilisation des données de connexion et toute information partagée sur
         notre plateforme ou application sont soumises à notre politique de
-        confidentialité, en conformité avec la législation algérienne. 10.
-        Droits des e-consommateurs L’e-consommateur dispose des droits suivants
-        : Droit d’accès à ses données personnelles, Droit de rectification en
-        cas d'erreur ou d'inexactitude, Droit de suppression de ses données sur
-        demande. 11. Obligations des e-consommateurs Pour utiliser nos services,
+        confidentialité, en conformité avec la législation algérienne.
+      </p>
+      <h3 className="text-lg font-semibold">
+        10. Droits des e-consommateurs L’e-consommateur dispose des droits
+        suivants :
+      </h3>
+      <p className="hyphens-auto text-wrap p-1">
+        Droit d’accès à ses données personnelles, Droit de rectification en cas
+        d'erreur ou d'inexactitude, Droit de suppression de ses données sur
+        demande.
+      </p>
+      <h3 className="text-lg font-semibold">
+        11. Obligations des e-consommateurs Pour utiliser nos services
+      </h3>
+      <p className="hyphens-auto text-wrap p-1">
         l’e-consommateur doit créer un compte avec des informations exactes
         (nom, prénom, numéro de téléphone, etc.). Il est seul responsable de
         l'exactitude de ses données et de l'utilisation qu'il fait de
