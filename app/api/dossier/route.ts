@@ -21,7 +21,6 @@ export async function POST(req) {
     }
 
     if (!files || files.length === 0) {
-      u;
       return NextResponse.json(
         { success: false, message: "No files uploaded" },
         { status: 400 }
